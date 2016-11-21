@@ -1,7 +1,4 @@
-package com.edison.demonstration.dao;
-
-import java.util.List;
-
+package com.edison.seller.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -12,10 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.edison.meta.Product;
 
 @Repository
-public interface DemonstrationDao {
-
-	@Select("select * from `content`")
-	public List<Product> getProductList();
+public interface SellerDao {
 
 	@Select("select * from content where id = #{id}")
 	public Product getProductAll(int id);
