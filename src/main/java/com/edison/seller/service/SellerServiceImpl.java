@@ -41,6 +41,9 @@ public class SellerServiceImpl implements SellerService {
 	public Product getProductFromGet(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		Product product = new Product();
+		String strId = request.getParameter("id");
+		int id = Integer.parseInt(strId);
+		product.setId(id);
 		product.setTitle(request.getParameter("title"));
 		product.setImage(request.getParameter("image"));
 		product.setDetail(request.getParameter("detail"));

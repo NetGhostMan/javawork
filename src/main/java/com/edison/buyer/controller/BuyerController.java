@@ -9,19 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.edison.demonstration.service.DemonstrationService;
+import com.edison.buyer.service.BuyerService;
 import com.edison.meta.Buy;
+import com.edison.uitl.MapUtil;
 
 @Controller
 public class BuyerController {
-	
-	
 	@Autowired
-	DemonstrationService demonstrationServiceImpl;
+	MapUtil mapUtil;
+	@Autowired
+	BuyerService buyerServiceImpl;
 	
 	@RequestMapping("/account")
 	public String toAccount(ModelMap map, HttpServletRequest request) {
-		List<Buy> buyList = demonstrationServiceImpl.getBuyList();
+		List<Buy> buyList = buyerServiceImpl.getBuyList();
 		
 
 		map.addAttribute("buyList", buyList);

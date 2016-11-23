@@ -31,7 +31,7 @@ public class SellerController {
 	@RequestMapping("/publicSubmit")
 	public String dopublicSubmit(HttpServletRequest request, ModelMap map) {
 		map = mapUtil.AfterAddUserMap(request, map);
-		Product product = demonstrationServiceImpl.getProductAll(request);
+		Product product = sellerServiceImpl.getProductFromGet(request);
 
 		if (product != null) {
 			sellerServiceImpl.saveProduct(product);

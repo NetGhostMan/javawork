@@ -29,43 +29,16 @@ public class DemonstrationServiceImpl implements DemonstrationService {
 		return products;
 	}
 
-	
-
-	@Override
-	public List<Buy> getBuyList() {
-		// TODO Auto-generated method stub
-		List<Buy> buyList = new ArrayList<Buy>();
-		Buy buy = new Buy();
-		buy.setId(1);
-		buy.setImage("sdf");
-		buy.setTitle("sdf");
-		buy.setBuyPrice(123);
-		buy.setBuyTime(201212232312L);
-		Buy buy1 = new Buy();
-		buy.setId(2);
-		buy.setImage("sdf");
-		buy.setTitle("sdf");
-		buy.setBuyPrice(123);
-		buy.setBuyTime(201212232312L);
-		buyList.add(buy1);
-		buyList.add(buy);
-		return buyList;
-	}
-
-
-
 	@Override
 	public Product getProductAll(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		String strId = request.getParameter("id");
 		int id = Integer.parseInt(strId);
 		Product product = demonstrationDao.getProductAll(id);
+		long longPrice = (long) product.getPrice();
+		double price = longPrice / 100;
+		product.setPrice(price);
 		return product;
 	}
 
-	
-
-	
-
-	
 }
