@@ -1,28 +1,27 @@
-package com.edison.login.service;
+package com.edison.uitl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import org.springframework.ui.ModelMap;
 
-import com.edison.login.dao.LoginDao;
 import com.edison.meta.User;
 
-@Service
-public class LoginServiceImpl implements LoginService {
-
+@Component
+public class MapUtil {
+	
 	@Autowired
-	LoginDao loginDao;
-
-	@Override
-	public void doLogout() {
-		// TODO Auto-generated method stub
-
+	public UtilDao utilDao;
+	
+	public ModelMap AfterAddUserMap(HttpServletRequest request,ModelMap map){
+		
+		User user = getUserFromGet(request);
+		map.addAttribute("user",user);
+		return map;
 	}
-
-	@Override
-	public User getUser(HttpServletRequest request) {
+	public User getUserFromGet(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		HttpSession httpSession = request.getSession();
 
@@ -33,12 +32,11 @@ public class LoginServiceImpl implements LoginService {
 			System.out.println(user.getUsername());
 
 			if (user.getUsername() != null) {
-				user.setUsertype(loginDao.getUsertype(user.getUsername()));
+				user.setUsertype(utilDao.getUsertype(user.getUsername()));
 			}
 			return user;
 		} else {
 			return null;
 		}
 	}
-
 }

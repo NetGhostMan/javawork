@@ -1,12 +1,12 @@
-package com.edison.login.dao;
+package com.edison.uitl;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LoginDao {
+public interface UtilDao {
 
-	@Select("select usertype from person where userName = #{username}")
+	@Select("select usertype from `person` where userName = #{username}")
 	public int getUsertype(String username);
 
 }

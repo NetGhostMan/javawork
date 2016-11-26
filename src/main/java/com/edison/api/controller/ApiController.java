@@ -10,21 +10,26 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.edison.api.service.DoLoginService;
+import com.edison.demonstration.service.DemonstrationService;
+import com.edison.meta.Product;
 import com.edison.meta.User;
 
 @Controller
 @RequestMapping("/api")
 public class ApiController {
 
+	int code = 100;
+	String message = "";
+	boolean result = false;
+	
 	@Autowired
 	DoLoginService doLoginServiceImpl;
+	@Autowired
+	DemonstrationService demonstrationServiceImpl;
 
 	@RequestMapping("/login")
 	public String doLogin(ModelMap map, HttpServletRequest request, HttpServletResponse response) {
-		int code = 100;
-		String message = "";
-		boolean result = false;
-
+	
 		User user = new User();
 		HttpSession httpSession = request.getSession();
 		String userName = request.getParameter("userName");
@@ -91,4 +96,29 @@ public class ApiController {
 		return "islogin";
 	}
 
+	@RequestMapping("/delete")
+	public String doDelete(HttpServletRequest request, ModelMap map) {
+		
+		if (doLoginServiceImpl.delete(request)) {
+			code = 200;
+			result = true;
+		}else{
+			message = "删除失败";
+		}
+		map.addAttribute("code", code);
+		map.addAttribute("message", message);
+		map.addAttribute("result", result);
+		return "delete";
+	}
+	@RequestMapping("/buy")
+	public String doBuy(HttpServletRequest request, ModelMap map){
+		Product product = demonstrationServiceImpl.getProductAll(request);
+		doLoginServiceImpl.saveBuy(request,product);
+		code = 200;
+		result = true;
+		map.addAttribute("code", code);
+		map.addAttribute("message", message);
+		map.addAttribute("result", result);
+		return "buy";
+	}
 }

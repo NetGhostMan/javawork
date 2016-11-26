@@ -1,12 +1,25 @@
 package com.edison.meta;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias(value="content")
 public class Product {
 	private int id;
 	private String title;
 	private String image;
-	private int price;
+	private double price;
+	private String detail;
 	private boolean isBuy;
 	private boolean isSell;
+	private String summary;
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
 	public int getId() {
 		return id;
@@ -32,11 +45,11 @@ public class Product {
 		this.image = image;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -55,4 +68,16 @@ public class Product {
 	public void setIsSell(boolean isSell) {
 		this.isSell = isSell;
 	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+		
+
+	
 }
